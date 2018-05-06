@@ -9,9 +9,18 @@ class Speaker extends HyperHTMLElement {
   render() {
     this.html`
       <style>
-      div { background: green }
+      .box {
+        width: 500px;
+        margin: 0 auto;
+        background: #6A9325;
+        color: white;
+        font-size: 32px;
+        font-weight: 600;
+        padding: 4px 8px;
+      }
       </style>
-      <div>name: ${this.name}</div>`
+      <div class=box>${this.name}</div>
+    `
   }
 }
 
