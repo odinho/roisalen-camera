@@ -4,12 +4,21 @@ class Subject extends HyperHTMLElement {
   static get observedAttributes() { return ['value'] }
   get defaultState() {
     return {
-      value: this.value || '',
+      subject: this.value || '',
     }
   }
   created() {
     this.attachShadow({mode: 'open'})
     this.render()
+  }
+  update(subject) {
+    let e = this.shadowRoot.querySelector('h1')
+    e.animate([
+        {transform: 'scale(2)'},
+        {transform: 'scale(2)', offset: 0.99},
+        {transform: 'scale(1)'},
+      ], {duration: 5000, easing: 'ease-out'})
+    this.setState({subject})
   }
   render() {
     const state = this.state
@@ -24,10 +33,12 @@ class Subject extends HyperHTMLElement {
         margin: 0 auto;
         opacity: 1;
         padding: 0 1vw;
+        transform-origin: top left;
+        will-change: transform, opacity;
       }
       </style>
-      <h1 class>
-        ${state.value}
+      <h1>
+        ${state.subject}
       </h1>
     `
   }
