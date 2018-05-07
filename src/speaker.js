@@ -2,16 +2,52 @@ import HyperHTMLElement from 'hyperhtml-element/esm'
 
 class Speaker extends HyperHTMLElement {
   static get observedAttributes() { return ['name', 'number', 'group'] }
+  get defaultState() {
+    return {
+      name: this.name || '',
+      number: this.number || '',
+      group: this.group || '',
+      is_hidden: this.is_hidden,
+      updating: false,
+    }
+  }
   created() {
     this.attachShadow({mode: 'open'})
-    this.is_hidden = false
-    setInterval(()=>{
-        this.is_hidden = !this.is_hidden
-        this.render()
-      }, 4000)
     this.render()
   }
+  update({name, number, group}) {
+    const upd = {
+      updating: true,
+      is_hidden: true,
+      upd_name: name,
+      upd_number: number,
+      upd_group: group,
+    }
+    // If hidden and we're not updating, transition won't fire
+    // to swap upd to new, just start showing it
+    if (!this.state.updating && this.state.is_hidden)
+      Object.assign(upd, {is_hidden: false, name, number, group})
+    this.setState(upd)
+  }
+  ontransitionend(ev) {
+    if (ev.propertyName !== 'opacity' || !this.state.updating)
+      return
+    const {upd_name, upd_number, upd_group, is_hidden} = this.state
+    const upd = {}
+    if (is_hidden) {
+      Object.assign(upd, {
+        name: upd_name,
+        number: upd_number,
+        group: upd_group,
+        is_hidden: false,
+      })
+    }
+    else
+      Object.assign(upd, {updating: false})
+    this.setState(upd)
+  }
   render() {
+    const state = this.state
     this.html`
       <style>
       .box {
@@ -45,13 +81,14 @@ class Speaker extends HyperHTMLElement {
         top: 50px;
       }
       </style>
-      <div class=${'box' + (this.is_hidden ? ' hidden' : '')}>
+      <div ontransitionend=${this}
+          class=${'box' + (state.is_hidden ? ' hidden' : '')}>
         <div class=topbox>
-          <div class=name>${this.name}</div>
+          <div class=name>${state.name}</div>
         </div>
         <div class=underbox>
-          <div class=number>${this.number}</div>
-          <div class=group>${this.group}</div>
+          <div class=number>${state.number}</div>
+          <div class=group>${state.group}</div>
         </div>
       </div>
     `
