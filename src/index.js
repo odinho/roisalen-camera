@@ -1,4 +1,5 @@
 import './speaker.js'
+import './subject.js'
 
 document.addEventListener('DOMContentLoaded', ()=>{
   let i = 0;
