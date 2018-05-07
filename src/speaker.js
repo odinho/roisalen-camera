@@ -56,29 +56,29 @@ class Speaker extends HyperHTMLElement {
         opacity: 1;
         position: relative;
         top: 1px;
-        transition: 0.5s all;
-        width: 500px;
+        transition: 0.5s opacity, 0.5s top;
+        width: 65vw;
       }
       .topbox {
         background: #6A9325;
         color: white;
-        font-size: 32px;
-        padding: 4px 8px;
+        font-size: 5vw;
+        padding: 0 1vw;
       }
       .underbox {
         color: #333;
         display: inline-block;
-        font-size: 20px;
-        margin-top: 4px;
+        font-size: 2.2vw;
+        margin-top: 0.5vw;
       }
       .underbox > div {
         background: #fff;
         display: inline-block;
-        padding: 0 10px;
+        padding: 0 1vw;
       }
       .hidden {
         opacity: 0.0001;
-        top: 50px;
+        top: 2vw;
       }
       </style>
       <div ontransitionend=${this}

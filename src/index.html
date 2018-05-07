@@ -10,11 +10,25 @@ html, body {
   padding: 0;
   font-family: 'Nunito Sans', sans-serif;
 }
-roi-speaker {
-  bottom: 40px;
+#root {
+  bottom: 0;
+  height: 56.25vw; /* 100/56.25 = 1.778 */
   left: 0;
-  position: fixed;
+  margin: auto;
+  max-height: 100vh;
+  max-width: 177.78vh; /* 16/9 = 1.778 */
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100vw;
+}
+roi-speaker {
+  bottom: 4vw;
+  left: 0;
+  position: absolute;
   right: 0;
 }
 </style>
-<div id=root></div>
+<div id=root>
+  <roi-speaker name="Odin Hørthe" group="England" number=2></roi-speaker>`
+</div>
