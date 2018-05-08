@@ -16,7 +16,7 @@ class Subject extends HyperHTMLElement {
     e.animate([
         {transform: 'scale(1)'},
         {transform: 'scale(1)', offset: 0.99},
-        {transform: `scale(${Subject.SCALE})`},
+        {transform: 'scale(0.6)'},
       ], {duration: Subject.DURATION, easing: 'ease-out'})
     this.setState({subject})
   }
@@ -34,7 +34,7 @@ class Subject extends HyperHTMLElement {
         opacity: 1;
         padding: 0 1vw;
         transform-origin: top left;
-        transform: scale(${Subject.SCALE});
+        transform: scale(0.6);
         will-change: transform;
       }
       </style>
