@@ -14,10 +14,10 @@ class Subject extends HyperHTMLElement {
   update(subject) {
     let e = this.shadowRoot.querySelector('h1')
     e.animate([
-        {transform: 'scale(2)'},
-        {transform: 'scale(2)', offset: 0.99},
         {transform: 'scale(1)'},
-      ], {duration: 5000, easing: 'ease-out'})
+        {transform: 'scale(1)', offset: 0.99},
+        {transform: `scale(${Subject.SCALE})`},
+      ], {duration: Subject.DURATION, easing: 'ease-out'})
     this.setState({subject})
   }
   render() {
@@ -28,13 +28,14 @@ class Subject extends HyperHTMLElement {
         background: #6A9325;
         color: white;
         display: inline-block;
-        font-size: 2.5vw;
+        font-size: 4vw;
         font-weight: 600;
         margin: 0 auto;
         opacity: 1;
         padding: 0 1vw;
         transform-origin: top left;
-        will-change: transform, opacity;
+        transform: scale(${Subject.SCALE});
+        will-change: transform;
       }
       </style>
       <h1>
@@ -44,4 +45,6 @@ class Subject extends HyperHTMLElement {
   }
 }
 
+Subject.SCALE = 0.6
+Subject.DURATION = 5000
 Subject.define('roi-subject');
