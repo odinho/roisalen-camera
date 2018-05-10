@@ -37,7 +37,7 @@ class Subject extends HyperHTMLElement {
         margin: 0 auto;
         opacity: 1;
         padding: 0 1vw;
-        transform-origin: top left;
+        transform-origin: top right;
         transform: scale(0.6);
         will-change: transform;
       }

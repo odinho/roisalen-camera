@@ -15,13 +15,12 @@ class App extends HyperHTMLElement {
       <style>
       roi-speaker {
         bottom: 4vw;
-        left: 0;
         position: absolute;
-        right: 0;
+        right: 4vw;
       }
       roi-subject {
         top: 4vw;
-        left: 4vw;
+        right: 4vw;
         position: absolute;
       }
       </style>

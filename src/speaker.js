@@ -59,14 +59,13 @@ class Speaker extends HyperHTMLElement {
         margin: 0 auto;
         opacity: 1;
         position: relative;
-        top: 1px;
-        transition: 0.5s opacity, 0.5s top;
-        width: 55vw;
+        right: 0;
+        transition: 0.5s opacity, 0.5s right;
       }
       .topbox {
         background: #6A9325;
         color: white;
-        font-size: 4vw;
+        font-size: 3vw;
         padding: 0 1vw;
       }
       .underbox {
@@ -82,7 +81,7 @@ class Speaker extends HyperHTMLElement {
       }
       .hidden {
         opacity: 0.0001;
-        top: 2vw;
+        right: -2vw;
       }
       </style>
       <div ontransitionend=${this}
