@@ -2,12 +2,29 @@ export default class Model {
   constructor({speakers, subjects}) {
     this.speakers = speakers
     this.subjects = subjects
-    this.listen()
+
+    this.speaker_list = null
+    this.speaker = null
+    this.start()
   }
-  listen() {
+  start() {
+    setInterval(this.fetch_speakerlist.bind(this), 1000)
+  }
+  fetch_speakerlist() {
     Model.fetch('speakerList').then(speakers_data => {
-        const speaker_data = speakers_data[0]
-        const ev = new CustomEvent('_newspeaker', {detail: speaker_data})
+        let speaker
+        for (const s of speakers_data) {
+          if (s.speaking)
+            speaker = s
+          else
+            speaker = (s.replies||[]).find(r => r.speaking)
+          if (speaker)
+            break
+        }
+        if (this.speaker && this.speaker.number == speaker.number)
+          return
+        this.speaker = speaker
+        const ev = new CustomEvent('_newspeaker', {detail: speaker})
         this.speakers.forEach(s => s.dispatchEvent(ev))
     })
   }
