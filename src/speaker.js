@@ -4,9 +4,11 @@ class Speaker extends HyperHTMLElement {
   static get observedAttributes() { return ['name', 'number', 'group'] }
   get defaultState() {
     return {
-      name: this.name || '',
-      number: this.number || '',
-      group: this.group || '',
+      speaker: {
+        name: this.name || '',
+        number: this.number || '',
+        group: this.group || '',
+      },
       is_hidden: this.is_hidden,
       updating: false,
     }
@@ -19,32 +21,28 @@ class Speaker extends HyperHTMLElement {
   on_newspeaker({detail}) {
     this.update(detail)
   }
-  update({name, number, group}) {
+  update(speaker) {
     const upd = {
       updating: true,
       is_hidden: true,
-      upd_name: name,
-      upd_number: number,
-      upd_group: group,
+      upd_speaker: speaker,
     }
     // If hidden and we're not updating, transition won't fire
     // to swap upd to new, just start showing it
-    if (!this.state.updating && this.state.is_hidden)
-      Object.assign(upd, {is_hidden: false, name, number, group})
+    if (speaker && !this.state.updating && this.state.is_hidden)
+      Object.assign(upd, {is_hidden: false, speaker})
     this.setState(upd)
   }
   ontransitionend(ev) {
     if (ev.propertyName !== 'opacity' || !this.state.updating)
       return
-    const {upd_name, upd_number, upd_group, is_hidden} = this.state
+    const {upd_speaker, is_hidden} = this.state
     const upd = {}
-    if (!is_hidden || (is_hidden && !upd_name))
+    if (!is_hidden || (is_hidden && !upd_speaker))
       Object.assign(upd, {updating: false})
     else {
       Object.assign(upd, {
-        name: upd_name,
-        number: upd_number,
-        group: upd_group,
+        speaker: upd_speaker,
         is_hidden: false,
       })
     }
@@ -87,11 +85,12 @@ class Speaker extends HyperHTMLElement {
       <div ontransitionend=${this}
           class=${'box' + (state.is_hidden ? ' hidden' : '')}>
         <div class=topbox>
-          <div class=name>${state.name}</div>
+          <div class=name>${state.speaker.name}</div>
         </div>
         <div class=underbox>
-          <div class=number>${state.number}</div>
-          <div class=group>${state.group}</div>
+          <div class=number>${state.speaker.number}</div>
+          <div class=group>${state.speaker.group}</div>
+          <div class=reply>${state.speaker.is_reply ? 'replikk' : ''}</div>
         </div>
       </div>
     `

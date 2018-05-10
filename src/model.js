@@ -28,16 +28,23 @@ export default class Model {
     Model.fetch('speakerList')
       .then(res=>res.json())
       .then(speakers_data => {
-        let speaker = {}
+        let speaker
         for (const s of speakers_data) {
           if (s.speaking)
             speaker = s
-          else
+          else {
             speaker = (s.replies||[]).find(r => r.speaking)
+            if (speaker)
+              speaker.is_reply = true
+          }
           if (speaker)
             break
         }
-        if (this.speaker && this.speaker.number == speaker.number)
+        if (this.speaker && speaker && this.speaker.number == speaker.number &&
+            this.speaker.is_reply == speaker.is_reply) {
+          return
+        }
+        if (!this.speaker && !speaker)
           return
         this.speaker = speaker
         const ev = new CustomEvent('_newspeaker', {detail: speaker})
