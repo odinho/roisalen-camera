@@ -24,8 +24,8 @@ class App extends HyperHTMLElement {
         position: absolute;
       }
       </style>
-      <roi-subject value="Sak 5 - Whatever" />
-      <roi-speaker name="Odin Hørthe" group="England" number=2 />
+      <roi-subject />
+      <roi-speaker />
     `
   }
 }
