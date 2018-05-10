@@ -28,7 +28,7 @@ export default class Model {
     Model.fetch('speakerList')
       .then(res=>res.json())
       .then(speakers_data => {
-        let speaker
+        let speaker = {}
         for (const s of speakers_data) {
           if (s.speaking)
             speaker = s

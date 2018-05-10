@@ -38,7 +38,9 @@ class Speaker extends HyperHTMLElement {
       return
     const {upd_name, upd_number, upd_group, is_hidden} = this.state
     const upd = {}
-    if (is_hidden) {
+    if (!is_hidden || (is_hidden && !upd_name))
+      Object.assign(upd, {updating: false})
+    else {
       Object.assign(upd, {
         name: upd_name,
         number: upd_number,
@@ -46,8 +48,6 @@ class Speaker extends HyperHTMLElement {
         is_hidden: false,
       })
     }
-    else
-      Object.assign(upd, {updating: false})
     this.setState(upd)
   }
   render() {
