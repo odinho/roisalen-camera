@@ -1,24 +1,14 @@
 import './speaker.js'
 import './subject.js'
+import Model from './model.js'
 import HyperHTMLElement from 'hyperhtml-element/esm'
 
 class App extends HyperHTMLElement {
   created() {
-    let i = 0;
-    const upd_test = ()=>{
-      i++
-      if ((i%2)==0)
-        this.querySelector('roi-subject').update('Test '+i)
-      this.querySelector('roi-speaker').update({
-        name: `Helene ${i}`,
-        number: 37,
-        group: 'Oslo',
-      })
-      setTimeout(upd_test, 6000-(i<4 ? i : 0)*1000)
-      this.render()
-    };
-    setTimeout(upd_test, 1000)
     this.render()
+    const subjects = Array.from(this.querySelectorAll('roi-subject'))
+    const speakers = Array.from(this.querySelectorAll('roi-speaker'))
+    this.model = new Model({subjects, speakers})
   }
   render() {
     this.html`

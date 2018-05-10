@@ -13,7 +13,11 @@ class Speaker extends HyperHTMLElement {
   }
   created() {
     this.attachShadow({mode: 'open'})
+    this.addEventListener('_newspeaker', this)
     this.render()
+  }
+  on_newspeaker({detail}) {
+    this.update(detail)
   }
   update({name, number, group}) {
     const upd = {
