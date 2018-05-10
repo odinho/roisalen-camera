@@ -9,7 +9,11 @@ class Subject extends HyperHTMLElement {
   }
   created() {
     this.attachShadow({mode: 'open'})
+    this.addEventListener('_newsubject', this)
     this.render()
+  }
+  on_newsubject({detail}) {
+    this.update(detail)
   }
   update(subject) {
     let e = this.shadowRoot.querySelector('h1')
