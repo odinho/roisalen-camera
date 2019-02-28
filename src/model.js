@@ -10,8 +10,8 @@ export default class Model {
   start() {
     this.fetch_subject()
     this.fetch_speakerlist()
-    setInterval(this.fetch_subject.bind(this), 4000)
-    setInterval(this.fetch_speakerlist.bind(this), 1000)
+    setInterval(this.fetch_subject.bind(this), 1000)
+    setInterval(this.fetch_speakerlist.bind(this), 400)
   }
   fetch_subject() {
     Model.fetch('subject')
