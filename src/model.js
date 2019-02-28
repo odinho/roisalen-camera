@@ -52,7 +52,7 @@ export default class Model {
     })
   }
   static fetch(api) {
-    return fetch(`https://roisalen.no/rest/${api}`,
-        {headers: {'X-organisation': 'MDG'}})
+    return fetch(`/rest/${api}`,
+        {headers: {'X-organisation': 'mdgoslo'}})
   }
 }
