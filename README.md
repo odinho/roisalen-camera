@@ -1,5 +1,6 @@
 # Develop
 
+    $ yarn install
     $ yarn run start
     Running at http://localhost:8888
 
