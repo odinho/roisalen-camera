@@ -1,3 +1,5 @@
+Very basic system that is polling roisalen to show some video overlays.
+
 # Develop
 
     $ yarn
@@ -6,4 +8,4 @@
 
 # Deploy
 
-    yarn build && scp dist/* skog.s0.no:/srv/www/roisalen.s0.no/camera-htdocs/
+    yarn build && scp dist/* server:/path/to/htdocs
