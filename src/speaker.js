@@ -63,13 +63,12 @@ class Speaker extends HyperHTMLElement {
       .topbox {
         background: #6A9325;
         color: white;
-        font-size: 3vw;
+        font-size: 2.5vw;
         padding: 0 1vw;
       }
       .underbox {
         color: #333;
-        display: inline-block;
-        font-size: 2.2vw;
+        font-size: 1.8vw;
         margin-top: 0.5vw;
       }
       .underbox > div {

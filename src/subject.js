@@ -32,7 +32,7 @@ class Subject extends HyperHTMLElement {
         background: #6A9325;
         color: white;
         display: inline-block;
-        font-size: 4vw;
+        font-size: 3.5vw;
         font-weight: 600;
         margin: 0 auto;
         opacity: 1;
