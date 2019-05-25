@@ -14,8 +14,7 @@ export default class Model {
     setInterval(this.fetch_speakerlist.bind(this), 400)
   }
   fetch_subject() {
-    Model.fetch('subject')
-      .then(res=>res.text())
+    Model.fetch('subject', false)
       .then(subject => {
         if (this.subject != null && this.subject == subject)
           return
@@ -26,7 +25,6 @@ export default class Model {
   }
   fetch_speakerlist() {
     Model.fetch('speakerList')
-      .then(res=>res.json())
       .then(speakers_data => {
         let speaker
         for (const s of speakers_data) {
@@ -51,8 +49,28 @@ export default class Model {
         this.speakers.forEach(s => s.dispatchEvent(ev))
     })
   }
-  static fetch(api) {
+  static fetch(api, json = true) {
     return fetch(`/rest/${api}`,
         {headers: {'X-organisation': 'mdgoslo'}})
+      .then(res=>{
+          if (!res.ok) {
+              if (api === 'subject') {
+                  return "Møte"
+              }
+              if (api === 'speakerList') {
+                  return [
+                      {
+                          group: "Gruppe",
+                          name: "Person",
+                          number: 1,
+                          speaking: true,
+                      }
+                  ]
+              }
+              console.error("fetch error", res)
+              throw res
+          }
+          return json ? res.json() : res.text()
+      })
   }
 }
